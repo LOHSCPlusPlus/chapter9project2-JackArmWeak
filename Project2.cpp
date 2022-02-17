@@ -44,6 +44,7 @@ VideoGame readVideoGame(ifstream &inFile) {
     inFile.get(game.Developer, VideoGame::MAX_CHAR_LEN, ';');
     inFile.ignore(100,';');
     inFile.get(game.Publisher, VideoGame::MAX_CHAR_LEN, '\n');
+    //Why does this make my program work?
     inFile.ignore(100,'\n');
     return game;
 }
@@ -99,7 +100,7 @@ void printAllGames(VideoGame *gameList, int listLength) {
 }
 
 //Adds Games
-void addGame(VideoGame *gameList) {
+void addGame(VideoGame *gameList, int gameSize) {
   bool isGameAdded = false;
   for(int i = 0; i < MAX_GAMES; i++) {
     double tempDouble = 0.0;
@@ -108,7 +109,8 @@ void addGame(VideoGame *gameList) {
       cout << "You are creating game #" << i << endl;
 
       cout << "Title: ";
-      cin >> gameList[i].Title;
+      cin.ignore(100,'\n');
+      cin.getline(gameList[i].Title,gameSize);
 
       tempDouble = readDouble("\nSales: ");
       gameList[i].Sales = tempDouble;
@@ -123,7 +125,8 @@ void addGame(VideoGame *gameList) {
       cin >> gameList[i].Developer;
 
       cout << "\nPublishser: ";
-      cin >> gameList[i].Publisher;
+      cin.ignore(100,'\n');
+      cin.getline(gameList[i].Publisher,gameSize);
 
       cout << endl;
 
@@ -237,7 +240,7 @@ int main() {
         break;
       //Adding new entry
       case 3:
-        addGame(gameList);
+        addGame(gameList,counter);
         counter++;
         break;
       //Removing entry
