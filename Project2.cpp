@@ -75,7 +75,7 @@ void printGame(ostream &out, VideoGame gameList){
 }
 
 //Reloads Database
-int reload(VideoGame *gameList) {
+int reload(VideoGame gameList[]) {
   ifstream gameFile("videogames.txt");
   VideoGame tempList[100];
   int temp = 0;
@@ -91,7 +91,7 @@ int reload(VideoGame *gameList) {
 }
 
 //Prints data of all video games to screen
-void printAllGames(VideoGame *gameList, int listLength) {
+void printAllGames(VideoGame gameList[], int listLength) {
     for(int i = 0; i < listLength; i++) {
       cout << "Index " << i << ": ";
       printGame(cout, gameList[i]);
@@ -100,7 +100,7 @@ void printAllGames(VideoGame *gameList, int listLength) {
 }
 
 //Adds Games
-void addGame(VideoGame *gameList, int gameSize) {
+void addGame(VideoGame gameList[], int gameSize) {
   bool isGameAdded = false;
   for(int i = 0; i < MAX_GAMES; i++) {
     double tempDouble = 0.0;
@@ -116,16 +116,16 @@ void addGame(VideoGame *gameList, int gameSize) {
       gameList[i].Sales = tempDouble;
 
       cout << "\nPlatform: ";
-      cin >> gameList[i].Platform;
+      cin.ignore(100,'\n');
+      cin.getline(gameList[i].Title,gameSize);
 
       cout << "\nRelease Date: ";
-      cin >> gameList[i].ReleaseDate;
+      cin.getline(gameList[i].ReleaseDate,gameSize);
 
       cout << "\nDeveloper: ";
-      cin >> gameList[i].Developer;
+      cin.getline(gameList[i].Developer,gameSize);
 
-      cout << "\nPublishser: ";
-      cin.ignore(100,'\n');
+      cout << "\nPublisher: ";
       cin.getline(gameList[i].Publisher,gameSize);
 
       cout << endl;
@@ -141,7 +141,7 @@ void addGame(VideoGame *gameList, int gameSize) {
 }
 
 //Removes Games
-void removeGame(VideoGame *gameList, int size) {
+void removeGame(VideoGame gameList[], int size) {
   int deleteindex = 0;
   cout << "Which game would you like to delete (0-" << size-1 << "): ";
   cin >> deleteindex;
@@ -153,7 +153,7 @@ void removeGame(VideoGame *gameList, int size) {
 }
 
 //Prints data of specific video games to screen
-void printDSGames(VideoGame *gameList, int listLength) {
+void printDSGames(VideoGame gameList[], int listLength) {
     for(int i = 0; i < listLength; i++) {
       if(strcmp(gameList[i].Platform,"Nintendo DS") == 0) {
         cout << "Index " << i << ": ";
