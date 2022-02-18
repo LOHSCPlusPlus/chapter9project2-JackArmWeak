@@ -117,7 +117,7 @@ void addGame(VideoGame gameList[], int gameSize) {
 
       cout << "\nPlatform: ";
       cin.ignore(100,'\n');
-      cin.getline(gameList[i].Title,gameSize);
+      cin.getline(gameList[i].Platform,gameSize);
 
       cout << "\nRelease Date: ";
       cin.getline(gameList[i].ReleaseDate,gameSize);
