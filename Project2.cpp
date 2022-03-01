@@ -141,9 +141,12 @@ void addGame(VideoGame gameList[], int gameSize) {
 
 //Removes Games
 void removeGame(VideoGame gameList[], int size) {
-  int deleteindex = 0;
+  int deleteindex = -1;
+  //Bounds for removing
+  while(deleteindex < 0 || deleteindex > size-1) {
   cout << "Which game would you like to delete (0-" << size-1 << ")";
   deleteindex = readDouble("\nInput: ");
+  }
   for(int i = deleteindex; i < size; i++) {
     gameList[i] = gameList[i+1];
   }
