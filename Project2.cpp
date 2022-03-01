@@ -44,7 +44,6 @@ VideoGame readVideoGame(ifstream &inFile) {
     inFile.get(game.Developer, VideoGame::MAX_CHAR_LEN, ';');
     inFile.ignore(100,';');
     inFile.get(game.Publisher, VideoGame::MAX_CHAR_LEN, '\n');
-    //Why does this make my program work?
     inFile.ignore(100,'\n');
     return game;
 }
@@ -83,7 +82,7 @@ int reload(VideoGame gameList[]) {
     tempList[temp] = readVideoGame(gameFile);
     temp++;
     }  
-  //Resetting list  
+  //Reloading list  
   for(int i = 0; i < MAX_GAMES; i++) {
     gameList[i] = tempList[i];
   }
@@ -143,8 +142,8 @@ void addGame(VideoGame gameList[], int gameSize) {
 //Removes Games
 void removeGame(VideoGame gameList[], int size) {
   int deleteindex = 0;
-  cout << "Which game would you like to delete (0-" << size-1 << "): ";
-  cin >> deleteindex;
+  cout << "Which game would you like to delete (0-" << size-1 << ")";
+  deleteindex = readDouble("\nInput: ");
   for(int i = deleteindex; i < size; i++) {
     gameList[i] = gameList[i+1];
   }
@@ -265,7 +264,7 @@ int main() {
         break;
       //Safety
       default :
-        cout << "Invalid Selection! Please Try Again" << endl;
+        cout << "\nInvalid Selection! Please Try Again" << endl;
         break;
   }
   menuSelect = menu();
